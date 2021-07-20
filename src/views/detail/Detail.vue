@@ -1,7 +1,6 @@
 <template>
   <div id="detail">
     <detail-nav-bar class="detail-nav" :current-index="navbarIndex" @titleClick="titleClick"></detail-nav-bar>
-
     <scroll class="content"
             ref="scroll"
             :probe-type="3"
@@ -120,7 +119,20 @@ export default {
       this.debounceTabContentOffsetTopsFunc();
     },
     addToCart(){
-      console.log('addToCart');
+      // console.log('addToCart');
+      // 获取购物车需要展示的信息，添加到购物车里
+      const cardProd = {};
+      cardProd.image = this.topImages[0];
+      cardProd.title = this.goods.title;
+      cardProd.desc = this.goods.desc;
+      cardProd.price = this.goods.nowPrice;
+      cardProd.iid = this.did;
+
+      // console.log(cardProd);
+      this.$store.commit('addCart', cardProd);
+
+      console.log(this.$toast);
+      this.$toast.show('当前商品数量+1');
     },
     scrolling(position) {
       // 判断backTop图标是否显示
